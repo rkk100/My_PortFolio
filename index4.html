@@ -53,15 +53,18 @@
     .small{font-size:13px;color:var(--muted)}
 
     footer{margin-top:28px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.02);text-align:center;color:var(--muted)}
-
     .social-row{display:flex;gap:10px;justify-content:center;margin-top:12px}
     .social-btn{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.03);display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:inherit}
-
     .status{margin-top:8px;font-weight:600}
+
+    /* Review Section */
+    #reviews{margin-top:32px}
+    .review-item{background:var(--glass);padding:10px 14px;border-radius:10px;margin-top:8px}
+    .review-item strong{color:var(--accent)}
+    .visitor-count{margin-top:10px;font-size:14px;color:var(--muted)}
 
     @media (max-width:980px){.hero{grid-template-columns:1fr}.about{grid-template-columns:1fr}.projects{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:640px){.projects{grid-template-columns:1fr}.logo{width:44px;height:44px;font-size:16px}header{flex-direction:column;align-items:flex-start}}
-
   </style>
 </head>
 <body>
@@ -84,6 +87,7 @@
     </header>
 
     <main>
+      <!-- Hero Section -->
       <section class="hero">
         <div>
           <div class="card">
@@ -98,6 +102,7 @@
               <div class="stat"><div style="font-weight:700">Fresher</div><div class="small">Experience</div></div>
               <div class="stat"><div style="font-weight:700">BCA</div><div class="small">Education</div></div>
             </div>
+            <div class="visitor-count">👀 Visitors: <span id="visitCount">0</span></div>
           </div>
 
           <section id="projects" style="margin-top:18px">
@@ -115,22 +120,21 @@
 
         <aside>
           <div class="card" style="text-align:center">
-            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Rohit" style="border-radius:10px;margin-bottom:12px;width:140px;height:140px;object-fit:cover"/>
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=800&auto=format&fit=crop" alt="Rohit" style="border-radius:10px;margin-bottom:12px;width:140px;height:140px;object-fit:cover"/>
             <div style="font-weight:700">Rohit Kumar</div>
             <div class="small">Based in India</div>
-
-            <div class="social-row" style="justify-content:center">
+            <div class="social-row">
               <a class="social-btn" href="https://instagram.com/yuvavichar3361" target="_blank"><i class="fab fa-instagram"></i></a>
               <a class="social-btn" href="https://github.com/rkk100" target="_blank"><i class="fab fa-github"></i></a>
               <a class="social-btn" href="https://www.facebook.com/Rohit-K-Singh-Chouhan" target="_blank"><i class="fab fa-facebook"></i></a>
-              <a id="lnkLinkedin" class="social-btn" href="https://www.linkedin.com/in/rohit-kumar" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a class="social-btn" href="https://www.linkedin.com/in/rohit-kumar" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
-
-            <div style="margin-top:12px"><a class="btn" href="reumey.pdf" download>Download CV</a></div>
+            <div style="margin-top:12px"><a class="btn" href="resumey.pdf" download>Download CV</a></div>
           </div>
         </aside>
       </section>
 
+      <!-- About Section -->
       <section id="about" class="about">
         <div class="card">
           <h3>About</h3>
@@ -153,28 +157,21 @@
         </div>
       </section>
 
+      <!-- Contact Section -->
       <section id="contact" class="contact">
         <div class="card">
           <h3>Contact</h3>
-          <p class="small">Send me a message — I will receive it in my email. (First time: verify FormSubmit email)</p>
-
+          <p class="small">Send me a message — I will receive it in my email. (Verify FormSubmit email first time)</p>
           <form id="contactForm">
             <input type="hidden" name="_subject" value="New message from Portfolio" />
             <input type="text" id="cname" name="name" placeholder="Your name" required />
             <input type="email" id="cemail" name="email" placeholder="Your email" required />
-            <input type="text" id="csubject" name="subject" placeholder="Subject (optional)" />
             <textarea id="cmessage" name="message" placeholder="Your message" required></textarea>
-
-            <!-- simple math captcha (works everywhere) -->
             <div style="display:flex;gap:8px;align-items:center">
               <div class="small" id="captchaLabel">Verify: </div>
-              <input type="text" id="captchaInput" placeholder="Answer" style="width:110px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06)" required />
+              <input type="text" id="captchaInput" placeholder="Answer" style="width:110px" required />
             </div>
-
-            <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
-              <button type="submit" id="sendBtn" class="btn">Send message</button>
-              <div class="small">Or email: <a href="mailto:rohitbca2005@gmail.com">rohitbca2005@gmail.com</a></div>
-            </div>
+            <button type="submit" id="sendBtn" class="btn" style="margin-top:10px">Send message</button>
             <div id="formStatus" class="status"></div>
           </form>
         </div>
@@ -188,91 +185,93 @@
         </aside>
       </section>
 
+      <!-- Reviews Section -->
+      <section id="reviews" class="card">
+        <h3>Visitor Reviews</h3>
+        <form id="reviewForm" style="margin-bottom:10px">
+          <input type="text" id="rname" placeholder="Your name" required />
+          <input type="number" id="rrate" placeholder="Rating (1–5)" min="1" max="5" required />
+          <textarea id="rmsg" placeholder="Your feedback" required></textarea>
+          <button type="submit" class="btn">Submit Review</button>
+        </form>
+        <div id="reviewList"></div>
+      </section>
+
     </main>
 
     <footer>
-      © <span id="year"></span> Rohit Kumar — Built with❤️
+      © <span id="year"></span> Rohit Kumar — Built with ❤️
     </footer>
   </div>
 
   <script>
-    // Basic dynamic interactions, math captcha and form send via FormSubmit
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Theme toggle
-    const modeToggle = document.getElementById('modeToggle');
-    // persist theme
     const savedTheme = localStorage.getItem('rk_theme') || 'dark';
     if(savedTheme === 'light') document.body.classList.add('light');
-    modeToggle.addEventListener('click', ()=>{
+    document.getElementById('modeToggle').onclick = ()=>{
       document.body.classList.toggle('light');
-      localStorage.setItem('rk_theme', document.body.classList.contains('light')? 'light':'dark');
-    });
+      localStorage.setItem('rk_theme', document.body.classList.contains('light')?'light':'dark');
+    };
 
-    // Simple math captcha generation
+    // Simple captcha
     function makeCaptcha(){
-      const a = Math.floor(Math.random()*9)+1;
-      const b = Math.floor(Math.random()*9)+1;
-      const label = document.getElementById('captchaLabel');
-      label.textContent = `Verify: ${a} + ${b} = `;
-      // store result
-      label.dataset.answer = (a+b).toString();
-    }
-    makeCaptcha();
+      const a=Math.floor(Math.random()*9)+1,b=Math.floor(Math.random()*9)+1;
+      const lbl=document.getElementById('captchaLabel');
+      lbl.textContent=`Verify: ${a} + ${b} = `;
+      lbl.dataset.answer=(a+b).toString();
+    } makeCaptcha();
 
-    // Form submission handler
-    const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/rohitbca2005@gmail.com'; // ajax endpoint
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
-    form.addEventListener('submit', async (e)=>{
+    // Contact form fix
+    document.getElementById('contactForm').addEventListener('submit', async (e)=>{
       e.preventDefault();
-      status.textContent = '';
-      const name = document.getElementById('cname').value.trim();
-      const email = document.getElementById('cemail').value.trim();
-      const message = document.getElementById('cmessage').value.trim();
-      const subject = document.getElementById('csubject').value.trim();
-      const captchaInput = document.getElementById('captchaInput').value.trim();
-      const captchaLabel = document.getElementById('captchaLabel');
+      const name=document.getElementById('cname').value.trim();
+      const email=document.getElementById('cemail').value.trim();
+      const msg=document.getElementById('cmessage').value.trim();
+      const ans=document.getElementById('captchaInput').value.trim();
+      const lbl=document.getElementById('captchaLabel');
+      const status=document.getElementById('formStatus');
+      const btn=document.getElementById('sendBtn');
 
-      if(!name || !email || !message){ status.style.color='orange'; status.textContent = 'Please fill required fields.'; return; }
-      if(captchaInput !== captchaLabel.dataset.answer){ status.style.color='orange'; status.textContent = 'Captcha incorrect — try again.'; makeCaptcha(); document.getElementById('captchaInput').value=''; return; }
-
-      // prepare payload
-      const payload = { name, email, subject, message };
-
-      // disable button
-      const btn = document.getElementById('sendBtn'); btn.disabled = true; btn.textContent = 'Sending...';
+      if(ans!==lbl.dataset.answer){status.style.color='orange';status.textContent='❌ Wrong captcha';makeCaptcha();return;}
+      btn.disabled=true;btn.textContent='Sending...';status.textContent='';
 
       try{
-        const res = await fetch(FORM_SUBMIT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
+        const res=await fetch('https://formsubmit.co/ajax/rohitbca2005@gmail.com',{
+          method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({name,email,message:msg})
         });
-        if(res.ok){
-          const data = await res.json();
-          status.style.color = 'lightgreen'; status.textContent = '✅ Message sent. Check your inbox.';
-          form.reset(); makeCaptcha();
-        } else {
-          // fallback: try standard form submit by creating hidden form
-          status.style.color='red'; status.textContent = 'Send failed via AJAX — trying fallback...';
-          // build fallback form
-          const f = document.createElement('form');
-          f.method='POST'; f.action='https://formsubmit.co/rohitbca2005@gmail.com';
-          f.style.display='none';
-          f.innerHTML = `<input name="name" value="${encodeHTML(name)}"><input name="email" value="${encodeHTML(email)}"><input name="subject" value="${encodeHTML(subject)}"><input name="message" value="${encodeHTML(message)}">`;
-          document.body.appendChild(f); f.submit();
-        }
-      }catch(err){
-        console.error('Send error', err);
-        status.style.color='red'; status.textContent = 'Network error. Try again later.';
-      }finally{ btn.disabled=false; btn.textContent='Send message'; }
+        if(res.ok){status.style.color='lightgreen';status.textContent='✅ Message sent successfully!';e.target.reset();makeCaptcha();}
+        else{status.style.color='red';status.textContent='⚠️ Send failed. Try again.';}
+      }catch(err){status.style.color='red';status.textContent='⚠️ Network error. Check connection.';}
+      finally{btn.disabled=false;btn.textContent='Send message';}
     });
 
-    function encodeHTML(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    // Visitor Counter (stored locally)
+    let visits=parseInt(localStorage.getItem('visitCount')||'0')+1;
+    localStorage.setItem('visitCount',visits);
+    document.getElementById('visitCount').textContent=visits;
 
-    // small accessibility
-    document.querySelectorAll('a').forEach(a=>a.addEventListener('keydown', (e)=>{ if(e.key==='Enter') a.click(); }));
+    // Reviews System (localStorage)
+    const reviewForm=document.getElementById('reviewForm');
+    const reviewList=document.getElementById('reviewList');
+    function renderReviews(){
+      const arr=JSON.parse(localStorage.getItem('rk_reviews')||'[]');
+      reviewList.innerHTML=arr.length?arr.map(r=>`<div class='review-item'><strong>${r.name}</strong> ⭐${r.rate}<br>${r.msg}</div>`).join(''):'<p class="small">No reviews yet.</p>';
+    } renderReviews();
+    reviewForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      const name=document.getElementById('rname').value.trim();
+      const msg=document.getElementById('rmsg').value.trim();
+      const rate=document.getElementById('rrate').value.trim();
+      if(!name||!msg||!rate)return;
+      const arr=JSON.parse(localStorage.getItem('rk_reviews')||'[]');
+      arr.unshift({name,rate,msg});
+      localStorage.setItem('rk_reviews',JSON.stringify(arr));
+      e.target.reset();renderReviews();
+    });
   </script>
 </body>
 </html>
